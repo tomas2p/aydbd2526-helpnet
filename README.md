@@ -3,11 +3,9 @@
 **Fecha:** 16 de noviembre de 2025
 **Autores:** alu0101474311@ull.edu.es (Tomás Pino Pérez)
 
----
 # 0. Introducción
 El proyecto consiste en diseñar e implementar una base de datos relacional completa junto con un API REST que permita gestionar un escenario original con entidades, relaciones y reglas de negocio. Se requiere elaborar un modelo conceptual ER que incluya entidades débiles, relaciones triples, jerarquías IS_A, relaciones 1:N y M:N, y al menos un caso de inclusión o exclusión; derivar el grafo relacional con claves, dominios y restricciones; implementar los scripts SQL en PostgreSQL con carga de datos de ejemplo, consultas de prueba y triggers/checks/assertions; y desarrollar un API REST en Flask documentando los endpoints con descripción, método HTTP y ejemplos de petición y respuesta.
 
----
 # 1. Descripción del modelo
 **Idea general:** HelpNet gestiona **organizaciones sin ánimo de lucro**, **proyectos sociales**, **voluntarios**, **actividades**, **localizaciones**, **recursos (donados o alquilados)** y **colaboraciones con voluntarios externos**. Permite registrar participaciones, uso de recursos y relaciones entre organizaciones y voluntarios.
 
@@ -40,7 +38,6 @@ El proyecto consiste en diseñar e implementar una base de datos relacional comp
 - Dependencia total en entidades débiles
 - Inclusividad en actividades con localizaciones
 
----
 # 2. Modelo Entidad-Relación
 ```mermaid
 flowchart LR
