@@ -2,7 +2,7 @@
 ![Fecha](https://img.shields.io/badge/Fecha-16/11/2025-white?style=for-the-badge&logo=datefns&logoColor=white)
 [![ModeloER](https://img.shields.io/badge/Modelo-Entidad/Relación-white?style=for-the-badge&logo=cachet&logoColor=white)](Modelos/Modelo_E_R/HelpNet_E_R.png)
 [![ModeloR](https://img.shields.io/badge/Modelo-Relacional-white?style=for-the-badge&logo=cachet&logoColor=white)](Modelos/Modelo_Relacional/HelpNet_Relacional.png)
-[![BD](https://img.shields.io/badge/BD-helpnet-white?style=for-the-badge&logo=postgresql&logoColor=white)](SQL_Scripts/ddl_helpnet.sql)
+[![BD](https://img.shields.io/badge/BD-helpnet-white?style=for-the-badge&logo=postgresql&logoColor=white)](SQL%20Scripts/ddl_helpnet.sql)
 
 ## Autores
 [![Integrante1](https://img.shields.io/badge/Tomás_Pino_Pérez-alu0101474311-white?style=for-the-badge&logo=maildotru&logoColor=white)](https://github.com/tomas2p)
