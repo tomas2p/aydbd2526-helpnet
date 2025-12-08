@@ -1,8 +1,12 @@
 # AyDBD 2025/26 - Proyecto HelpNet
-**Fecha:** 16 de noviembre de 2025
+![Fecha](https://img.shields.io/badge/Fecha-16/11/2025-white?style=for-the-badge&logo=datefns&logoColor=white)
+[![ModeloER](https://img.shields.io/badge/Modelo-Entidad/Relación-white?style=for-the-badge&logo=cachet&logoColor=white)](Modelos/Modelo_E_R/HelpNet_E_R.png)
+[![ModeloR](https://img.shields.io/badge/Modelo-Relacional-white?style=for-the-badge&logo=cachet&logoColor=white)](Modelos/Modelo_Relacional/HelpNet_Relacional.png)
+[![BD](https://img.shields.io/badge/BD-helpnet-white?style=for-the-badge&logo=postgresql&logoColor=white)](SQL_Scripts/ddl_helpnet.sql)
 
 ## Autores
-[![Integrante1](https://img.shields.io/badge/Tomás%20Pino%20Pérez-alu0101474311-white?style=for-the-badge)](https://github.com/tomas2p)
+[![Integrante1](https://img.shields.io/badge/Tomás_Pino_Pérez-alu0101474311-white?style=for-the-badge&logo=maildotru&logoColor=white)](https://github.com/tomas2p)
+[![Integrante1](https://img.shields.io/badge/Juan_Esteban_Tamayo_Marmolejo-alu0101592916-white?style=for-the-badge&logo=maildotru&logoColor=white)](https://github.com/Juanes-TM)
 
 # 0. Introducción
 El proyecto consiste en diseñar e implementar una base de datos relacional completa junto con un API REST que permita gestionar un escenario original con entidades, relaciones y reglas de negocio. Se requiere elaborar un modelo conceptual ER que incluya entidades débiles, relaciones triples, jerarquías IS_A, relaciones 1:N y M:N, y al menos un caso de inclusión o exclusión; derivar el grafo relacional con claves, dominios y restricciones; implementar los scripts SQL en PostgreSQL con carga de datos de ejemplo, consultas de prueba y triggers/checks/assertions; y desarrollar un API REST en Flask documentando los endpoints con descripción, método HTTP y ejemplos de petición y respuesta.
