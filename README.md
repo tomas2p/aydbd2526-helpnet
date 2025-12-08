@@ -44,3 +44,9 @@ El proyecto consiste en diseñar e implementar una base de datos relacional comp
 
 # 3. Modelo Relacional
 ![](Modelos/Modelo_Relacional/HelpNet_Relacional.png)
+
+# 4. SQL Scripts
+A continuación se presenta una descripción de los archivos SQL incluidos en el proyecto, indicando el propósito de cada uno y cómo contribuyen a la gestión y manipulación de la base de datos:
+- `ddl_helpnet.sql`: Contiene sentencias DDL (Data Definition Language), como CREATE, ALTER y DROP. Se usa para definir y modificar la estructura de las tablas, vistas, índices y otros objetos de la base de datos.
+- `dml_helpnet.sql`: Incluye sentencias DML (Data Manipulation Language), como INSERT, UPDATE y DELETE. Sirve para manipular los datos dentro de las tablas ya existentes.
+- `delete_data.sql`: Normalmente contiene instrucciones para eliminar datos específicos de las tablas, generalmente usando sentencias DELETE. No modifica la estructura, solo borra registros.
