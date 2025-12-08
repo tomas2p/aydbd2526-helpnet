@@ -1,0 +1,30 @@
+-- ==========================================
+-- SCRIPT DE ELIMINACIÓN TOTAL DE DATOS
+-- ==========================================
+
+-- Deshabilitar temporalmente las restricciones para limpiar en cualquier orden
+SET session_replication_role = replica;
+
+-- Tablas dependientes primero
+TRUNCATE TABLE COORDINA CASCADE;
+TRUNCATE TABLE PARTICIPA CASCADE;
+TRUNCATE TABLE CESION CASCADE;
+TRUNCATE TABLE VOLUNTARIO_SKILL CASCADE;
+TRUNCATE TABLE RECURSO_USADO CASCADE;
+TRUNCATE TABLE RECURSO_DONADO CASCADE;
+TRUNCATE TABLE RECURSO_ALQUILADO CASCADE;
+
+-- Tablas principales
+TRUNCATE TABLE LOCALIZACION CASCADE;
+TRUNCATE TABLE ACTIVIDAD CASCADE;
+TRUNCATE TABLE PROYECTO CASCADE;
+TRUNCATE TABLE VOLUNTARIO CASCADE;
+TRUNCATE TABLE RECURSO CASCADE;
+TRUNCATE TABLE EMAIL_ORGANIZACION CASCADE;
+TRUNCATE TABLE ORGANIZACION CASCADE;
+
+-- Volver a habilitar restricciones
+SET session_replication_role = DEFAULT;
+
+-- Mensaje de confirmación
+DO $$ BEGIN RAISE NOTICE 'Todos los datos han sido eliminados.'; END $$;
