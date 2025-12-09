@@ -120,21 +120,21 @@ El sistema debe soportar acuerdos complejos de colaboración. Se requiere regist
 * **Proyecto:**
     * **ID:** Código numérico único. INTEGER, ejemplo: 202501.
     * **Nombre:** Título del proyecto. VARCHAR(100), ejemplo: "Campaña Vacunación 2025".
-    * **Descripción:** Detalle del proyecto. TEXT, ejemplo: "Inmunización masiva contra la gripe en zonas rurales".
+    * **Descripción:** Detalle del proyecto. TEXT, ejemplo: "Inmunización masiva contra la gripe en zonas rurales". Puede ser nula.
     * **Fecha_Inicio:** DATE, ejemplo: 2025-01-01.
     * **Fecha_Fin** DATE, ejemplo: 2025-11-30.
 
 * **Actividad:**
     * **ID:** Código numérico único. INTEGER, ejemplo: 1.
     * **Nombre:** Título de la actividad. VARCHAR(100), ejemplo: "Logística de distribución".
-    * **Descripción:** Detalle de la tarea. TEXT, ejemplo: "Transporte de neveras médicas a los puntos de vacunación".
+    * **Descripción:** Detalle de la tarea. TEXT, ejemplo: "Transporte de neveras médicas a los puntos de vacunación". Puede ser nula.
     * **Fecha_Inicio:** DATE, ejemplo: 2025-01-05.
     * **Fecha_Fin** DATE, ejemplo: 2025-01-06.
 
 * **Localización:**
     * **ID:** Identificador secuencial del lugar (dependiente de la actividad). INTEGER, ejemplo: 1.
     * **Descripción:** Nombre o referencia del sitio físico. VARCHAR(200), ejemplo: "Carpa Médica Plaza Central".
-    * **Observaciones:** Notas sobre acceso o seguridad. TEXT, ejemplo: "Acceso habilitado para ambulancias por calle trasera".
+    * **Observaciones:** Notas sobre acceso o seguridad. TEXT, ejemplo: "Acceso habilitado para ambulancias por calle trasera". Puede ser nula.
     * **Latitud:** Coordenada geográfica decimal. DECIMAL(10,8), ejemplo: 28.4636.
     * **Longitud:** Coordenada geográfica decimal. DECIMAL(11,8), ejemplo: -16.2518.
 
@@ -150,13 +150,13 @@ El sistema debe soportar acuerdos complejos de colaboración. Se requiere regist
 * **Recurso (Superclase):**
     * **ID:** Identificador único del recurso. INTEGER, ejemplo: 500.
     * **Nombre:** Nombre del material. VARCHAR(100), ejemplo: "Nevera Portátil".
-    * **Descripción:** Características técnicas. TEXT, ejemplo: "Capacidad 50L, control de temperatura digital".
+    * **Descripción:** Características técnicas. TEXT, ejemplo: "Capacidad 50L, control de temperatura digital". Puede ser nula.
     * **Fecha Entrega:** Fecha en la que el recurso entra en inventario. DATE, ejemplo: 2024-01-10.
     * **Tipo:** Discriminador de la jerarquía. CHAR(1), ejemplo: 'D' (Donado) o 'A' (Alquilado).
 
 * **Donado (Subclase):**
-    * **Nombre Donante:** Persona o entidad que cede el bien. VARCHAR(100), ejemplo: "Farmacias Unidas".
-    * **Email Donante:** Contacto del donante. VARCHAR(100), ejemplo: "rsc@farmaciasunidas.com".
+    * **Nombre Donante:** Persona o entidad que cede el bien. VARCHAR(100), ejemplo: "Farmacias Unidas". Puede ser nulo.
+    * **Email Donante:** Contacto del donante. VARCHAR(100), ejemplo: "rsc@farmaciasunidas.com". Puede ser nulo.
     * **Estado:** Condición del recurso. VARCHAR(50), ejemplo: "Nuevo".
 
 * **Alquilado (Subclase):**
@@ -166,22 +166,23 @@ El sistema debe soportar acuerdos complejos de colaboración. Se requiere regist
 
 * **Atributos de las Relaciones:**
   * **Rol:** Función general en el proyecto. VARCHAR(50), ejemplo: "Enfermero".
-  * **Evaluación (en Participa):** Nota de desempeño (0-10). INTEGER, ejemplo: 9.
-  * **Evaluación (en Coordina):** Nota específica como líder de zona (0-10). INTEGER, ejemplo: 10.
+  * **Evaluación (en Participa):** Nota de desempeño (0-10). INTEGER, ejemplo: 9. Puede ser nulo.
+  * **Evaluación (en Coordina):** Nota específica como líder de zona (0-10). INTEGER, ejemplo: 10. Puede ser nulo.
   * **Fecha_Cesión:** Fecha del acuerdo de cesión. DATE, ejemplo: 2025-01-15.
-  * **Duración:** Tiempo del préstamo inter-organizacional en días. VARCHAR(50), ejemplo: "30 días".
+  * **Duración:** Tiempo del préstamo inter-organizacional en días. INTEGER, ejemplo: 30.
 
 ## Restricciones semánticas:
 
 * La **Fecha_Inicio** de un proyecto o actividad no puede ser posterior a su **Fecha_Fin**.
 * El intervalo de tiempo de una **Actividad** debe estar comprendido estrictamente dentro del intervalo de tiempo del **Proyecto** al que pertenece.
 * Un **Voluntario** no puede figurar simultáneamente en las relaciones **Coordina** y **Participa** para una misma **Localización**.
+* Los **Voluntarios** deben ser mayores de edad al momento de darse de alta.
 * El atributo **Evaluación** debe ser números enteros comprendidos en un rango definido (e.g., 0 ≤ Nota ≤ 10).
 * El **Costo** de un recurso alquilado debe ser siempre mayor o igual a cero.
 * Si el atributo discriminador **Tipo** de un recurso indica 'Donado', debe existir obligatoriamente una correspondencia en la entidad **Donado** y no en **Alquilado** (y viceversa).
 * La **Edad** del voluntario debe ser consistente con la diferencia entre la fecha actual y su **Fecha_Nacimiento**.
 * La **Fecha_Cesión** en la relación ternaria debe estar comprendida dentro del periodo de vigencia del **Proyecto** receptor.
-* Las coordenadas de una Localización (Latitud y Longitud) deben estar dentro de los rangos geográficos válidos (−90 ≤ Latitud ≤ 90 y −180 ≤ Longitud ≤ 180).
+* Las coordenadas de una **Localización** (Latitud y Longitud) deben estar dentro de los rangos geográficos válidos (−90 ≤ Latitud ≤ 90 y −180 ≤ Longitud ≤ 180).
 
 # 3. Modelo E/R
 ![](Modelos/Modelo_E_R/HelpNet_E_R.png)
