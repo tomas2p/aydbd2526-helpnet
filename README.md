@@ -68,7 +68,7 @@ El sistema debe soportar acuerdos complejos de colaboración. Se requiere regist
 
 ## Descripción de las entidades definidas:
 
-* **Organización:** Representa a las entidades promotoras registradas en el sistema. Su clave primaria es el **Nombre**. Su atributo **Tipo** indica la naturaleza de la organización (e.g., Fundación, Asociación) y posee un atributo multivaluado **Email** para gestionar múltiples puntos de contacto.
+* **Organización:** Representa a las entidades promotoras registradas en el sistema. Su clave primaria es el **Nombre**. Su atributo **Tipo** indica la naturaleza de la organización (e.g., Médica, Infancia) y posee un atributo multivaluado **Email** para gestionar múltiples puntos de contacto.
 
 * **Proyecto:** Representa las iniciativas humanitarias creadas por las organizaciones. Su clave primaria es su **ID_Proyecto**. Sus atributos incluyen: **Nombre**, **Descripción**, **Fecha_Inicio** y **Fecha_Fin**. Es la entidad fuerte de la cual dependen jerárquicamente las actividades.
 
