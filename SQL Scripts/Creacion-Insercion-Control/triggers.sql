@@ -160,33 +160,7 @@ EXECUTE FUNCTION limpiar_recursos_proyecto();
 
 
 ---------------------------------------------------------
--- 6. No se puede añadir una actividad a un proyecto finalizado
----------------------------------------------------------
-CREATE OR REPLACE FUNCTION verificar_proyecto_activo()
-RETURNS TRIGGER AS $$
-DECLARE
-    v_fecha_fin_proyecto DATE;
-BEGIN
-    SELECT fecha_fin INTO v_fecha_fin_proyecto
-    FROM proyecto
-    WHERE id_proyecto = NEW.id_proyecto;
-    IF v_fecha_fin_proyecto < CURRENT_DATE THEN
-        RAISE EXCEPTION 'Error de Negocio: No se puede añadir una actividad al proyecto % porque ya ha finalizado (Fecha fin: %)', 
-                        NEW.id_proyecto, v_fecha_fin_proyecto;
-    END IF;
-
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_verificar_proyecto_activo
-BEFORE INSERT OR UPDATE ON actividad
-FOR EACH ROW
-EXECUTE FUNCTION verificar_proyecto_activo();
-
-
----------------------------------------------------------
--- 7. No se puede añadir una localización a una actividad finalizada
+-- 6. No se puede añadir una localización a una actividad finalizada
 ---------------------------------------------------------
 CREATE OR REPLACE FUNCTION verificar_actividad_activa()
 RETURNS TRIGGER AS $$
@@ -213,7 +187,7 @@ EXECUTE FUNCTION verificar_actividad_activa();
 
 
 ---------------------------------------------------------
--- 8. Un voluntario no puede hacer actividades que se solapen
+-- 7. Un voluntario no puede hacer actividades que se solapen
 ---------------------------------------------------------
 CREATE OR REPLACE FUNCTION verificar_agenda_voluntario()
 RETURNS TRIGGER AS $$
