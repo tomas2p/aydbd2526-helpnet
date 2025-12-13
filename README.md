@@ -3,12 +3,21 @@
 [![ModeloER](https://img.shields.io/badge/Modelo-Entidad/Relación-white?style=for-the-badge&logo=cachet&logoColor=white)](Modelos/Modelo_E_R/HelpNet_E_R.png)
 [![ModeloR](https://img.shields.io/badge/Modelo-Relacional-white?style=for-the-badge&logo=cachet&logoColor=white)](Modelos/Modelo_Relacional/HelpNet_Relacional.png)
 [![BD](https://img.shields.io/badge/BD-helpnet-white?style=for-the-badge&logo=postgresql&logoColor=white)](SQL%20Scripts/ddl_helpnet.sql)
-[![API](https://img.shields.io/badge/Api-FastApi-white?style=for-the-badge&logo=fastapi&logoColor=white)](por_hacer)
+[![API](https://img.shields.io/badge/Api-FastApi-white?style=for-the-badge&logo=fastapi&logoColor=white)](api/README.md)
+![API_COV](https://img.shields.io/badge/Api_Coverage-90%-white?style=for-the-badge&logo=coverage&logoColor=white)
 
 ## Autores
 [![Integrante1](https://img.shields.io/badge/Tomás_Pino_Pérez-alu0101474311-white?style=for-the-badge&logo=maildotru&logoColor=white)](https://github.com/tomas2p)
 [![Integrante1](https://img.shields.io/badge/Juan_Esteban_Tamayo_Marmolejo-alu0101592916-white?style=for-the-badge&logo=maildotru&logoColor=white)](https://github.com/Juanes-TM)
 
+# Índice
+- [0. Introducción](#0-introducción)
+- [1. Descripción y requisitos](#1-descripción-y-requisitos)
+- [2. Descripción del modelo E/R](#2-descripción-del-modelo-er)
+- [3. Modelo E/R](#3-modelo-er)
+- [4. Modelo relacional](#4-modelo-relacional)
+- [5. SQL scripts](#5-sql-scripts)
+- [6. API REST](#6-api-rest)
 
 # 0. Introducción
 
@@ -227,3 +236,87 @@ Para un despliegue correcto de la base de datos, es fundamental seguir el siguie
 
 > **¿Por qué este orden?**
 > Los scripts de inserción contienen datos históricos y registros de diversos periodos de tiempo. Se recomienda ejecutar la carga de datos **antes** de activar los `triggers`. Si se activan los triggers antes de la carga masiva, es posible que algunas inserciones históricas sean bloqueadas por reglas de negocio diseñadas para validar operaciones en tiempo real.
+
+# 6. API REST
+
+El proyecto incluye una **API REST completa** desarrollada con **FastAPI** que proporciona acceso programático a todas las funcionalidades del sistema HelpNet.
+
+## 🚀 Características Principales
+
+- ✅ **50 tests pasando al 100%** - Suite completa de pruebas con pytest
+- ✅ **CRUD completo** para 14 tablas del modelo relacional
+- ✅ **Herencia polimórfica** - Recursos donados y alquilados con respuestas dinámicas
+- ✅ **Validaciones de negocio** - Edad mínima 18 años, rangos geográficos válidos, fechas consistentes
+- ✅ **Paginación** - Todos los listados soportan `skip` y `limit`
+- ✅ **Información de cascada** - DELETE muestra conteo exacto de registros eliminados
+- ✅ **Documentación automática** - Swagger UI y ReDoc integrados
+- ✅ **Relaciones complejas** - Claves compuestas, relaciones N:M y ternarias
+
+## 📚 Documentación de la API
+
+Para información detallada sobre instalación, configuración y uso de la API:
+
+- **[README de la API](api/README.md)** - Guía completa de instalación, configuración y ejecución
+- **[Documentación de Endpoints](api/API_ENDPOINTS.md)** - Tabla detallada con todos los endpoints, ejemplos de petición y respuesta
+
+## 🔗 Endpoints Principales
+
+La API expone los siguientes grupos de endpoints:
+
+| Recurso | Endpoints | Funcionalidad |
+|---------|-----------|---------------|
+| **Organizaciones** | `/api/organizaciones/*` | Gestión de organizaciones y sus emails |
+| **Proyectos** | `/api/proyectos/*` | CRUD de proyectos humanitarios |
+| **Actividades** | `/api/proyectos/{id}/actividades/*` | Gestión de actividades por proyecto |
+| **Localizaciones** | `/api/proyectos/{id}/actividades/{id}/localizaciones/*` | Puntos geográficos de actividades |
+| **Voluntarios** | `/api/voluntarios/*` | Gestión de voluntarios y habilidades |
+| **Recursos** | `/api/recursos/*` | Recursos polimórficos (donados/alquilados) |
+| **Participaciones** | `/api/participaciones/*` | Asignación de voluntarios con rol operativo |
+| **Coordinaciones** | `/api/coordinaciones/*` | Asignación de voluntarios como responsables |
+| **Cesiones** | `/api/cesiones/*` | Relación ternaria org-proyecto-voluntario |
+
+## 🛠️ Inicio Rápido
+
+```bash
+# 1. Navegar a la carpeta de la API
+cd api
+
+# 2. Crear entorno virtual (si no existe)
+python3 -m venv venv
+
+# 3. Instalar dependencias
+./run_api.sh install
+
+# 4. Configurar variables de entorno
+cp .env.example .env
+# Editar .env con credenciales de PostgreSQL
+
+# 5. Ejecutar base de datos (ver sección 5 arriba)
+psql -U usuario -d helpnet -f ../ddl_helpnet.sql
+
+# 6. Iniciar servidor
+./run_api.sh
+
+# 7. Ver documentación interactiva
+# http://localhost:8000/docs
+```
+
+## 🧪 Testing
+
+```bash
+# Ejecutar todos los tests y medir cobertura
+./run_api.sh test --cov=app 
+```
+
+**Resultado**: ✅ **134/134 tests pasando sin warnings and coverage 90%**
+
+## 📊 Tecnologías Utilizadas
+
+- **FastAPI** 0.104+ - Framework web moderno y rápido
+- **SQLAlchemy** 2.0+ - ORM con soporte para herencia polimórfica
+- **Pydantic** 2.5+ - Validación de datos y serialización
+- **PostgreSQL** 13+ - Base de datos relacional
+- **Pytest** 7.0+ - Framework de testing
+- **Uvicorn** - Servidor ASGI de alto rendimiento
+
+Para más información sobre la arquitectura, estructura del proyecto y características avanzadas, consultar la [documentación completa de la API](api/README.md).
