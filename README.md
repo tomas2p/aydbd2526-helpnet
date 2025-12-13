@@ -4,7 +4,7 @@
 [![ModeloR](https://img.shields.io/badge/Modelo-Relacional-white?style=for-the-badge&logo=cachet&logoColor=white)](Modelos/Modelo_Relacional/HelpNet_Relacional.png)
 [![BD](https://img.shields.io/badge/BD-helpnet-white?style=for-the-badge&logo=postgresql&logoColor=white)](SQL%20Scripts/ddl_helpnet.sql)
 [![API](https://img.shields.io/badge/Api-FastApi-white?style=for-the-badge&logo=fastapi&logoColor=white)](api/README.md)
-![API_COV](https://img.shields.io/badge/Api_Coverage-90%-white?style=for-the-badge&logo=coverage&logoColor=white)
+![API_COV](https://img.shields.io/badge/Api_Coverage-90%25-white?style=for-the-badge&logo=cachet&logoColor=white)
 
 ## Autores
 [![Integrante1](https://img.shields.io/badge/Tomás_Pino_Pérez-alu0101474311-white?style=for-the-badge&logo=maildotru&logoColor=white)](https://github.com/tomas2p)
