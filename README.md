@@ -225,7 +225,6 @@ A continuación se describen los scripts SQL incluidos en el proyecto, organizad
 - [**`Test_Triggers.sql`**](SQL%20Scripts/Modificaciones/Triggers/Test_Triggers.sql): Script de "estrés" para los triggers. Intenta insertar datos que violan las reglas de negocio para asegurar que el sistema bloquea correctamente las operaciones inválidas.
 
 ---
-
 > [!WARNING]
 ## Orden de Ejecución Recomendado
 
@@ -236,7 +235,8 @@ Para un despliegue correcto de la base de datos, es fundamental seguir el siguie
 3. [**`triggers.sql`**](SQL%20Scripts/Creacion-Insercion-Control/triggers.sql): Activación de las reglas de negocio.
 
 > **¿Por qué este orden?**
-> Los scripts de inserción contienen datos históricos y registros de diversos periodos de tiempo. Se recomienda ejecutar la carga de datos **antes** de activar los `triggers`. Si se activan los triggers antes de la carga masiva, es posible que algunas inserciones históricas sean bloqueadas por reglas de negocio diseñadas para validar operaciones en tiempo real.
+> 
+> Los scripts de inserción contienen datos históricos y registros de diversos periodos de tiempo. Se recomienda ejecutar la carga de datos antes de activar los triggers. Si se activan los triggers antes de la carga masiva, es posible que algunas inserciones históricas sean bloqueadas por reglas de negocio diseñadas para validar operaciones en tiempo real.
 
 # 6. API REST
 
