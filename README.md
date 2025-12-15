@@ -13,11 +13,32 @@
 # Índice
 - [0. Introducción](#0-introducción)
 - [1. Descripción y requisitos](#1-descripción-y-requisitos)
+  - [1.1. Descripción general](#11-descripción-general)
+  - [1.2. Especificación de requisitos](#12-especificación-de-requisitos)
+    - [1.2.1. Gestión de organizaciones y proyectos](#121-gestión-de-organizaciones-y-proyectos)
+    - [1.2.2. Estructura jerárquica de actividades](#122-estructura-jerárquica-de-actividades)
+    - [1.2.3. Gestión del voluntariado](#123-gestión-del-voluntariado)
+    - [1.2.4. Roles y restricciones operativas](#124-roles-y-restricciones-operativas)
+    - [1.2.5. Gestión de recursos](#125-gestión-de-recursos)
+    - [1.2.6. Colaboración inter-organizacional](#126-colaboración-inter-organizacional)
 - [2. Descripción del modelo E/R](#2-descripción-del-modelo-er)
+  - [2.1. Descripción de las entidades definidas](#21-descripción-de-las-entidades-definidas)
+  - [2.2. Descripción de las relaciones definidas](#22-descripción-de-las-relaciones-definidas)
+  - [2.3. Dominio de los atributos](#23-descripción-y-ejemplos-ilustrativos-del-dominio-de-cada-uno-de-los-atributos)
+  - [2.4. Restricciones semánticas](#24-restricciones-semánticas)
 - [3. Modelo E/R](#3-modelo-er)
 - [4. Modelo relacional](#4-modelo-relacional)
 - [5. SQL scripts](#5-sql-scripts)
+  - [5.1. Creación, inserción y control](#51-creación-inserción-y-control)
+  - [5.2. Consultas](#52-consultas)
+  - [5.3. Pruebas y modificaciones](#53-pruebas-y-modificaciones)
 - [6. API REST](#6-api-rest)
+  - [6.1. Características principales](#61-características-principales)
+  - [6.2. Documentación de la API](#62-documentación-de-la-api)
+  - [6.3. Endpoints principales](#63-endpoints-principales)
+  - [6.4. Inicio rápido](#64-inicio-rápido)
+  - [6.5. Testing](#65-testing)
+  - [6.6. Tecnologías utilizadas](#66-tecnologías-utilizadas)
 
 # 0. Introducción
 
@@ -25,33 +46,33 @@ El proyecto consiste en diseñar e implementar una base de datos relacional comp
 
 # 1. Descripción y requisitos
 
-## Descripción general:
+## 1.1. Descripción general:
 
 **HelpNet** es una plataforma tecnológica diseñada para facilitar la orquestación integral de iniciativas humanitarias, conectando organizaciones sin ánimo de lucro, voluntarios y recursos materiales bajo un entorno unificado. El sistema busca optimizar la asignación de recursos y garantizar la trazabilidad de las acciones solidarias.
 
-## Especificación de requisitos:
+## 1.2. Especificación de requisitos:
 
 El sistema deberá registrar, consultar y gestionar la información basándose en las siguientes reglas de negocio y restricciones técnicas:
 
-### 1. Gestión de organizaciones y proyectos
+### 1.2.1. Gestión de organizaciones y proyectos
 
 Las organizaciones son las entidades promotoras del sistema.
 * Cada organización tiene **múltiples correos electrónicos de contacto**.
 * Es responsable de crear **proyectos**, definidos por un periodo de tiempo y que deben tener una descripción.
 * Cada proyecto emplea diversos recursos para su ejecución.
 
-### 2. Estructura jerárquica de actividades
+### 1.2.2. Estructura jerárquica de actividades
 
 La planificación operativa de los proyectos sigue una estructura estrictamente jerárquica para garantizar la trazabilidad:
 
 * Todo **proyecto** se desglosa en múltiples **actividades**.
 * A su vez, cada actividad se despliega físicamente en una o varias **localizaciones** específicas. Se debe modelar esta dependencia de forma que una **localización** no pueda ser identificada ni existir en el sistema sin conocer la **actividad** y el **proyecto** al que pertenece.
 
-### 3. Gestión del voluntariado
+### 1.2.3. Gestión del voluntariado
 
 Los voluntarios se registran con sus datos personales básicos (nombre, correo electrónico, fecha de nacimiento...). El sistema debe almacenar el conjunto de **habilidades** que posee cada voluntario (ej. "Primeros Auxilios", "Conducción"), permitiendo incluir detalles para cada habilidad.
 
-### 4. Roles y restricciones operativas
+### 1.2.4. Roles y restricciones operativas
 
 La participación de los voluntarios ocurre de dos formas:
 
@@ -60,7 +81,7 @@ La participación de los voluntarios ocurre de dos formas:
 
 De tal manera que en una misma localización específica, un voluntario **nunca puede desempeñar ambos roles simultáneamente**, asegurando así la segregación de funciones entre ejecución y supervisión. 
 
-### 5. Gestión de recursos
+### 1.2.5. Gestión de recursos
 
 El sistema gestiona un inventario de recursos clasificados según su procedencia mediante una **jerarquía total y exclusiva**:
 
@@ -69,13 +90,13 @@ El sistema gestiona un inventario de recursos clasificados según su procedencia
 
 Un recurso debe pertenecer obligatoriamente a una de estas dos categorías y no puede pertenecer a ambas simultáneamente.
 
-### 6. Colaboración inter-organizacional
+### 1.2.6. Colaboración inter-organizacional
 
 El sistema debe soportar acuerdos complejos de colaboración. Se requiere registrar cuando una **organización** cede formalmente a un **voluntario**, o un grupo de ellos, específico para colaborar en un **proyecto** gestionado por otra entidad, registrando la fecha y duración de dicho acuerdo de cesión.
 
 # 2. Descripción del modelo E/R
 
-## Descripción de las entidades definidas:
+## 2.1. Descripción de las entidades definidas:
 
 * **Organización:** Representa a las entidades promotoras registradas en el sistema. Su clave primaria es el **Nombre**. Su atributo **Tipo** indica la naturaleza de la organización (e.g., Médica, Infancia) y posee un atributo multivaluado **Email** para gestionar múltiples puntos de contacto.
 
@@ -93,7 +114,7 @@ El sistema debe soportar acuerdos complejos de colaboración. Se requiere regist
 
 * **Alquilado:** Subclase que representa los recursos obtenidos mediante pago temporal. Hereda de **Recurso**. Sus atributos específicos son: **Proveedor**, **Costo** y **Fecha_Devolución**.
 
-## Descripción de las relaciones definidas:
+## 2.2. Descripción de las relaciones definidas:
 
 * **Crea:** Relaciona a la **Organización** con el **Proyecto**.
     * **Cardinalidad:** Una **Organización** puede crear uno o más **Proyectos (1:N)**, y un **Proyecto** es creado por exactamente una **Organización (1:1)**.
@@ -119,7 +140,7 @@ El sistema debe soportar acuerdos complejos de colaboración. Se requiere regist
 * **Ceder (Relación Ternaria):** Relación simultánea entre **Organización**, **Proyecto** y **Voluntario**. Representa un acuerdo especial donde una organización externa "presta" un voluntario a un proyecto ajeno.
     * **Cardinalidad:** Muchas **Organizaciones** pueden ceder muchos **Voluntarios** a muchos otros **Proyectos (N:M:P)**.
 
-## Descripción y ejemplos ilustrativos del dominio de cada uno de los atributos:
+## 2.3. Descripción y ejemplos ilustrativos del dominio de cada uno de los atributos:
 
 * **Organización:**
     * **Nombre:** Identificador único. VARCHAR(100), ejemplo: "Cruz Roja Española".
@@ -180,7 +201,7 @@ El sistema debe soportar acuerdos complejos de colaboración. Se requiere regist
   * **Fecha_Cesión:** Fecha del acuerdo de cesión. DATE, ejemplo: 2025-01-15.
   * **Duración:** Tiempo del préstamo inter-organizacional en días. INTEGER, ejemplo: 30.
 
-## Restricciones semánticas:
+## 2.4. Restricciones semánticas:
 
 * La **Fecha_Inicio** de un proyecto o actividad no puede ser posterior a su **Fecha_Fin**.
 * El intervalo de tiempo de una **Actividad** debe estar comprendido estrictamente dentro del intervalo de tiempo del **Proyecto** al que pertenece.
@@ -200,9 +221,23 @@ El sistema debe soportar acuerdos complejos de colaboración. Se requiere regist
 ![](Modelos/Modelo_Relacional/HelpNet_Relacional.png)
 
 # 5. SQL scripts
+
+> [!WARNING]
+> **Orden de Ejecución Recomendado**
+>
+> Para un despliegue correcto de la base de datos, es fundamental seguir el siguiente orden secuencial:
+>
+> 1. [**`ddl_helpnet.sql`**](SQL%20Scripts/Creacion-Insercion-Control/ddl_helpnet.sql): Primero se debe crear la estructura.
+> 2. [**`data_insert.sql`**](SQL%20Scripts/Creacion-Insercion-Control/data_insert.sql) (o [**`dml_helpnet.sql`**](SQL%20Scripts/Creacion-Insercion-Control/dml_helpnet.sql)): Carga masiva de datos iniciales.
+> 3. [**`triggers.sql`**](SQL%20Scripts/Creacion-Insercion-Control/triggers.sql): Activación de las reglas de negocio.
+>
+> **¿Por qué este orden?**
+> 
+> Los scripts de inserción contienen datos históricos y registros de diversos periodos de tiempo. Se recomienda ejecutar la carga de datos antes de activar los triggers. Si se activan los triggers antes de la carga masiva, es posible que algunas inserciones históricas sean bloqueadas por reglas de negocio diseñadas para validar operaciones en tiempo real.
+
 A continuación se describen los scripts SQL incluidos en el proyecto, organizados según su propósito funcional:
 
-### Creación, inserción y control
+## 5.1. Creación, inserción y control
 
 - [**`ddl_helpnet.sql`**](SQL%20Scripts/Creacion-Insercion-Control/ddl_helpnet.sql): Contiene las sentencias DDL (*Data Definition Language*). Es el script base que crea la estructura del esquema: tablas, vistas, dominios y relaciones iniciales.
 
@@ -212,31 +247,29 @@ A continuación se describen los scripts SQL incluidos en el proyecto, organizad
 
 - [**`triggers.sql`**](SQL%20Scripts/Creacion-Insercion-Control/triggers.sql): Define la lógica procedimental del negocio. Incluye la creación de funciones y disparadores (triggers) que vigilan las reglas complejas (solapamiento de fechas, exclusividad de roles, etc.).
 
-### Consultas
+## 5.2. Consultas
 
 - [**`basicas.sql`**](SQL%20Scripts/Consultas/Basicas/basicas.sql): Script de comprobación rápida. Realiza selecciones generales sobre todas las tablas y vistas para verificar que los datos se han cargado correctamente.
 
 - [**`avanzadas.sql`**](SQL%20Scripts/Consultas/Avanzadas/avanzadas.sql): Conjunto de consultas complejas que responden a preguntas de negocio (ej. *Listar voluntarios polivalentes*, *Recursos en riesgo de devolución*, etc.), haciendo uso de JOINS, agrupaciones y subconsultas.
 
-### Pruebas y modificaciones
+## 5.3. Pruebas y modificaciones
 
 - [**`Test_Checks.sql`**](SQL%20Scripts/Modificaciones/Checks/Test_Checks.sql): Batería de pruebas para validar las restricciones `CHECK` (edades, coordenadas, fechas coherentes) y el correcto funcionamiento del borrado en cascada (`ON DELETE CASCADE`).
 
 - [**`Test_Triggers.sql`**](SQL%20Scripts/Modificaciones/Triggers/Test_Triggers.sql): Script de "estrés" para los triggers. Intenta insertar datos que violan las reglas de negocio para asegurar que el sistema bloquea correctamente las operaciones inválidas.
 
 ---
-> [!WARNING]
-> ## Orden de Ejecución Recomendado
->
-> Para un despliegue correcto de la base de datos, es fundamental seguir el siguiente orden secuencial:
-> 
-> 1. [**`ddl_helpnet.sql`**](SQL%20Scripts/Creacion-Insercion-Control/ddl_helpnet.sql): Primero se debe crear la estructura.
-> 2. [**`data_insert.sql`**](SQL%20Scripts/Creacion-Insercion-Control/data_insert.sql) (o [**`dml_helpnet.sql`**](SQL%20Scripts/Creacion-Insercion-Control/dml_helpnet.sql)): Carga masiva de datos iniciales.
-> 3. [**`triggers.sql`**](SQL%20Scripts/Creacion-Insercion-Control/triggers.sql): Activación de las reglas de negocio.
-> 
-> ---
-> 
-> ### ¿Por qué este orden?
+
+## ⚠️ Orden de Ejecución Recomendado
+
+Para un despliegue correcto de la base de datos, es fundamental seguir el siguiente orden secuencial:
+
+1. [**`ddl_helpnet.sql`**](SQL%20Scripts/Creacion-Insercion-Control/ddl_helpnet.sql): Primero se debe crear la estructura.
+2. [**`data_insert.sql`**](SQL%20Scripts/Creacion-Insercion-Control/data_insert.sql) (o [**`dml_helpnet.sql`**](SQL%20Scripts/Creacion-Insercion-Control/dml_helpnet.sql)): Carga masiva de datos iniciales.
+3. [**`triggers.sql`**](SQL%20Scripts/Creacion-Insercion-Control/triggers.sql): Activación de las reglas de negocio.
+
+> **¿Por qué este orden?**
 > 
 > Los scripts de inserción contienen datos históricos y registros de diversos periodos de tiempo. Se recomienda ejecutar la carga de datos antes de activar los triggers. Si se activan los triggers antes de la carga masiva, es posible que algunas inserciones históricas sean bloqueadas por reglas de negocio diseñadas para validar operaciones en tiempo real.
 
@@ -244,7 +277,7 @@ A continuación se describen los scripts SQL incluidos en el proyecto, organizad
 
 El proyecto incluye una **API REST completa** desarrollada con **FastAPI** que proporciona acceso programático a todas las funcionalidades del sistema HelpNet.
 
-## Características Principales
+## 6.1. Características Principales
 
 - **50 tests pasando al 100%** - Suite completa de pruebas con pytest
 - **CRUD completo** para 14 tablas del modelo relacional
@@ -255,14 +288,14 @@ El proyecto incluye una **API REST completa** desarrollada con **FastAPI** que p
 - **Documentación automática** - Swagger UI y ReDoc integrados
 - **Relaciones complejas** - Claves compuestas, relaciones N:M y ternarias
 
-## Documentación de la API
+## 6.2. Documentación de la API
 
 Para información detallada sobre instalación, configuración y uso de la API:
 
 - **[README de la API](api/README.md)** - Guía completa de instalación, configuración y ejecución
 - **[Documentación de Endpoints](api/API_ENDPOINTS.md)** - Tabla detallada con todos los endpoints, ejemplos de petición y respuesta
 
-## Endpoints Principales
+## 6.3. Endpoints Principales
 
 La API expone los siguientes grupos de endpoints:
 
@@ -278,7 +311,7 @@ La API expone los siguientes grupos de endpoints:
 | **Coordinaciones** | `/api/coordinaciones/*` | Asignación de voluntarios como responsables |
 | **Cesiones** | `/api/cesiones/*` | Relación ternaria org-proyecto-voluntario |
 
-## Inicio Rápido
+## 6.4. Inicio Rápido
 
 ```bash
 # 1. Navegar a la carpeta de la API
@@ -304,7 +337,7 @@ psql -U usuario -d helpnet -f ../ddl_helpnet.sql
 # http://localhost:8000/docs
 ```
 
-## Testing
+## 6.5. Testing
 
 ```bash
 # Ejecutar todos los tests y medir cobertura
@@ -313,7 +346,7 @@ psql -U usuario -d helpnet -f ../ddl_helpnet.sql
 
 **Resultado**: **134/134 tests pasando sin warnings and coverage 90%**
 
-## Tecnologías Utilizadas
+## 6.6. Tecnologías Utilizadas
 
 - **FastAPI** 0.104+ - Framework web moderno y rápido
 - **SQLAlchemy** 2.0+ - ORM con soporte para herencia polimórfica
@@ -323,3 +356,44 @@ psql -U usuario -d helpnet -f ../ddl_helpnet.sql
 - **Uvicorn** - Servidor ASGI de alto rendimiento
 
 Para más información sobre la arquitectura, estructura del proyecto y características avanzadas, consultar la [documentación completa de la API](api/README.md).
+
+# 7. Presupuesto del proyecto
+
+El presupuesto del proyecto **HelpNet** se estima basándose en la metodología de costes fijos, enfocándose en la valoración de las horas de trabajo técnico dedicadas por los dos integrantes del equipo. Tomando en cuenta la complejidad y tamaño del problema.
+
+Se establece una tarifa de trabajo técnico cualificado de **15€/hora**.
+
+## 7.1. Estimación de horas por fase
+
+La complejidad del diseño (entidades débiles, jerarquía, N:M:P, triggers de negocio) requiere una distribución significativa de esfuerzo, especialmente en las fases de Lógica de Integridad y Desarrollo de la API.
+
+| Fase de Desarrollo | Tareas Clave | Horas Estimadas | Costo Estimado (€) |
+| :--- | :--- | :--- | :--- |
+| **I. Diseño Conceptual** | Especificación de requisitos y Modelado E/R. | 8 | 120 € |
+| **II. Diseño Lógico y Físico** | Derivación del Modelo Relacional, definición de Claves y Dominios. | 2 | 30 € |
+| **III. Implementación SQL (DDL/DML)** | Creación de tablas (`ddl_helpnet.sql`) y Carga de Datos (`data_insert.sql`). | 10 | 150 € |
+| **IV. Lógica de Integridad** | Implementación de  `TRIGGERs` de negocio (solapamiento, exclusión, liberación, etc.). | 6 | 90 € |
+| **V. Pruebas de Integridad** | Diseño y ejecución de pruebas de integridad (`Test_Checks.sql`, `Test_Triggers.sql`) y obtención de capturas. | 3 | 45 € |
+| **VI. Desarrollo API REST (FastAPI)** | Diseño de *endpoints*, lógica CRUD, herencia polimórfica y *testing* unitario (cobertura 90%). | 10 | 150 € |
+| **VII. Documentación y Entrega**| Elaboración del informe, documentación de la API y preparación del repositorio GitHub. | 8 | 120 € |
+| **TOTAL** | | **47 horas** | **705 €** |
+
+## 7.2. Costo de licencias y tecnología
+
+El proyecto se sustenta sobre un ecosistema de tecnologías de código abierto (*Open Source*), eliminando el costo directo de licencias.
+
+| Componente | Tecnología | Licencia | Costo de Licencia |
+| :--- | :--- | :--- | :--- |
+| **Base de datos** | PostgreSQL 13+ | PostgreSQL (BSD) | 0,00 € |
+| **Framework web** | FastAPI, Pydantic, SQLAlchemy | MIT | 0,00 € |
+| **Servidor** | Python 3.x, Uvicorn | Python Software Foundation | 0,00 € |
+| **Herramientas de diseño** | Draw.io, VS Code, Git | Gratuito | 0,00 € |
+| **TOTAL LICENCIAS** | | | **0,00 €** |
+
+## 7.3. Resumen financiero
+
+| Concepto | Costo |
+| :--- | :--- |
+| **Mano de Obra (120 horas @ 20€/h)** | 705 € |
+| **Licencias y Software** | 0,00 € |
+| **TOTAL PRESUPUESTO ESTIMADO** | **705 €** |
