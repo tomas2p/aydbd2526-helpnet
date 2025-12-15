@@ -221,6 +221,20 @@ El sistema debe soportar acuerdos complejos de colaboración. Se requiere regist
 ![](Modelos/Modelo_Relacional/HelpNet_Relacional.png)
 
 # 5. SQL scripts
+
+> [!WARNING]
+> **Orden de Ejecución Recomendado**
+>
+> Para un despliegue correcto de la base de datos, es fundamental seguir el siguiente orden secuencial:
+>
+> 1. [**`ddl_helpnet.sql`**](SQL%20Scripts/Creacion-Insercion-Control/ddl_helpnet.sql): Primero se debe crear la estructura.
+> 2. [**`data_insert.sql`**](SQL%20Scripts/Creacion-Insercion-Control/data_insert.sql) (o [**`dml_helpnet.sql`**](SQL%20Scripts/Creacion-Insercion-Control/dml_helpnet.sql)): Carga masiva de datos iniciales.
+> 3. [**`triggers.sql`**](SQL%20Scripts/Creacion-Insercion-Control/triggers.sql): Activación de las reglas de negocio.
+>
+> **¿Por qué este orden?**
+> 
+> Los scripts de inserción contienen datos históricos y registros de diversos periodos de tiempo. Se recomienda ejecutar la carga de datos antes de activar los triggers. Si se activan los triggers antes de la carga masiva, es posible que algunas inserciones históricas sean bloqueadas por reglas de negocio diseñadas para validar operaciones en tiempo real.
+
 A continuación se describen los scripts SQL incluidos en el proyecto, organizados según su propósito funcional:
 
 ## 5.1. Creación, inserción y control
@@ -244,20 +258,6 @@ A continuación se describen los scripts SQL incluidos en el proyecto, organizad
 - [**`Test_Checks.sql`**](SQL%20Scripts/Modificaciones/Checks/Test_Checks.sql): Batería de pruebas para validar las restricciones `CHECK` (edades, coordenadas, fechas coherentes) y el correcto funcionamiento del borrado en cascada (`ON DELETE CASCADE`).
 
 - [**`Test_Triggers.sql`**](SQL%20Scripts/Modificaciones/Triggers/Test_Triggers.sql): Script de "estrés" para los triggers. Intenta insertar datos que violan las reglas de negocio para asegurar que el sistema bloquea correctamente las operaciones inválidas.
-
----
-> [!WARNING]
-> **Orden de Ejecución Recomendado**
->
-> Para un despliegue correcto de la base de datos, es fundamental seguir el siguiente orden secuencial:
->
-> 1. [**`ddl_helpnet.sql`**](SQL%20Scripts/Creacion-Insercion-Control/ddl_helpnet.sql): Primero se debe crear la estructura.
-> 2. [**`data_insert.sql`**](SQL%20Scripts/Creacion-Insercion-Control/data_insert.sql) (o [**`dml_helpnet.sql`**](SQL%20Scripts/Creacion-Insercion-Control/dml_helpnet.sql)): Carga masiva de datos iniciales.
-> 3. [**`triggers.sql`**](SQL%20Scripts/Creacion-Insercion-Control/triggers.sql): Activación de las reglas de negocio.
->
-> **¿Por qué este orden?**
-> 
-> Los scripts de inserción contienen datos históricos y registros de diversos periodos de tiempo. Se recomienda ejecutar la carga de datos antes de activar los triggers. Si se activan los triggers antes de la carga masiva, es posible que algunas inserciones históricas sean bloqueadas por reglas de negocio diseñadas para validar operaciones en tiempo real.
 
 # 6. API REST
 
