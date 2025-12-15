@@ -226,7 +226,8 @@ A continuación se describen los scripts SQL incluidos en el proyecto, organizad
 
 ---
 
-## ⚠️ Orden de Ejecución Recomendado
+> [!WARNING]
+## Orden de Ejecución Recomendado
 
 Para un despliegue correcto de la base de datos, es fundamental seguir el siguiente orden secuencial:
 
