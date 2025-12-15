@@ -39,6 +39,10 @@
   - [6.4. Inicio rápido](#64-inicio-rápido)
   - [6.5. Testing](#65-testing)
   - [6.6. Tecnologías utilizadas](#66-tecnologías-utilizadas)
+- [7. Presupuesto del proyecto](#7-presupuesto-del-proyecto)
+  - [7.1. Estimación de horas por fase](#71-estimación-de-horas-por-fase)
+  - [7.2. Costo de licencias y tecnología](#72-costo-de-licencias-y-tecnología)
+  - [7.3. Resumen financiero](#73-resumen-financiero)
 
 # 0. Introducción
 
