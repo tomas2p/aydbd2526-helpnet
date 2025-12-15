@@ -241,25 +241,25 @@ Para un despliegue correcto de la base de datos, es fundamental seguir el siguie
 
 El proyecto incluye una **API REST completa** desarrollada con **FastAPI** que proporciona acceso programático a todas las funcionalidades del sistema HelpNet.
 
-## 🚀 Características Principales
+## Características Principales
 
-- ✅ **50 tests pasando al 100%** - Suite completa de pruebas con pytest
-- ✅ **CRUD completo** para 14 tablas del modelo relacional
-- ✅ **Herencia polimórfica** - Recursos donados y alquilados con respuestas dinámicas
-- ✅ **Validaciones de negocio** - Edad mínima 18 años, rangos geográficos válidos, fechas consistentes
-- ✅ **Paginación** - Todos los listados soportan `skip` y `limit`
-- ✅ **Información de cascada** - DELETE muestra conteo exacto de registros eliminados
-- ✅ **Documentación automática** - Swagger UI y ReDoc integrados
-- ✅ **Relaciones complejas** - Claves compuestas, relaciones N:M y ternarias
+- **50 tests pasando al 100%** - Suite completa de pruebas con pytest
+- **CRUD completo** para 14 tablas del modelo relacional
+- **Herencia polimórfica** - Recursos donados y alquilados con respuestas dinámicas
+- **Validaciones de negocio** - Edad mínima 18 años, rangos geográficos válidos, fechas consistentes
+- **Paginación** - Todos los listados soportan `skip` y `limit`
+- **Información de cascada** - DELETE muestra conteo exacto de registros eliminados
+- **Documentación automática** - Swagger UI y ReDoc integrados
+- **Relaciones complejas** - Claves compuestas, relaciones N:M y ternarias
 
-## 📚 Documentación de la API
+## Documentación de la API
 
 Para información detallada sobre instalación, configuración y uso de la API:
 
 - **[README de la API](api/README.md)** - Guía completa de instalación, configuración y ejecución
 - **[Documentación de Endpoints](api/API_ENDPOINTS.md)** - Tabla detallada con todos los endpoints, ejemplos de petición y respuesta
 
-## 🔗 Endpoints Principales
+## Endpoints Principales
 
 La API expone los siguientes grupos de endpoints:
 
@@ -275,7 +275,7 @@ La API expone los siguientes grupos de endpoints:
 | **Coordinaciones** | `/api/coordinaciones/*` | Asignación de voluntarios como responsables |
 | **Cesiones** | `/api/cesiones/*` | Relación ternaria org-proyecto-voluntario |
 
-## 🛠️ Inicio Rápido
+## Inicio Rápido
 
 ```bash
 # 1. Navegar a la carpeta de la API
@@ -301,16 +301,16 @@ psql -U usuario -d helpnet -f ../ddl_helpnet.sql
 # http://localhost:8000/docs
 ```
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Ejecutar todos los tests y medir cobertura
 ./run_api.sh test --cov=app 
 ```
 
-**Resultado**: ✅ **134/134 tests pasando sin warnings and coverage 90%**
+**Resultado**: **134/134 tests pasando sin warnings and coverage 90%**
 
-## 📊 Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 - **FastAPI** 0.104+ - Framework web moderno y rápido
 - **SQLAlchemy** 2.0+ - ORM con soporte para herencia polimórfica
