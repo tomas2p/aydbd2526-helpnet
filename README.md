@@ -132,7 +132,7 @@ El sistema debe soportar acuerdos complejos de colaboración. Se requiere regist
 * **Emplea:** Relaciona **Proyecto** con **Recurso**, indicando el uso de materiales.
     * **Cardinalidad:** Un **Proyecto** emplea uno o más **Recursos (1:N)** y un **Recurso** a lo largo del tiempo es empleado en varios **Proyectos (1:N)** durante su ciclo de vida registrado.
 
-* **Participa:** Relaciona al **Voluntario** con el **Localización**.
+* **Participa:** Relaciona al **Voluntario** con la **Localización**.
     * **Atributos:** Posee **Rol** (cargo general en el proyecto) y **Evaluación** (nota final de desempeño).
     * **Cardinalidad:** Un **Voluntario** participa en uno o varias **Actividades desarrolladas en alguna localización (1:N)** y a us vez estas tienen inscritos a varios **Voluntarios (1:N)**.
 
