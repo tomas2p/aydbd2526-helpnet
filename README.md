@@ -134,11 +134,11 @@ El sistema debe soportar acuerdos complejos de colaboración. Se requiere regist
 
 * **Participa:** Relaciona al **Voluntario** con la **Localización**.
     * **Atributos:** Posee **Rol** (cargo general en el proyecto) y **Evaluación** (nota final de desempeño).
-    * **Cardinalidad:** Un **Voluntario** participa en uno o varias **Actividades desarrolladas en alguna localización (1:N)** y a us vez estas tienen inscritos a varios **Voluntarios (1:N)**.
+    * **Cardinalidad:** Un **Voluntario** participa en uno o varias **Actividades desarrolladas en alguna localización (1:N)** y a su vez estas tienen inscritos a varios **Voluntarios (1:N)**.
 
 * **Coordina:** Relaciona al **Voluntario** con la **Localización**, indicando que actúa como responsable o jefe de zona.
     * **Atributos:** **Valoración** (desempeño específico como líder).
-    * **Cardinalidad:** Un **Voluntario** coordina una o varias **Actividades desarrolladas en alguna localización (1:N)** y a us vez estas tienen como coordinadores a varios **Voluntarios (1:N)**.
+    * **Cardinalidad:** Un **Voluntario** coordina una o varias **Actividades desarrolladas en alguna localización (1:N)** y a su vez estas tienen como coordinadores a varios **Voluntarios (1:N)**.
     * **Restricción:** Un **Voluntario** coordina o participa en alguna actividad, pero no ambas.
 
 * **Ceder (Relación Ternaria):** Relación simultánea entre **Organización**, **Proyecto** y **Voluntario**. Representa un acuerdo especial donde una organización externa "presta" un voluntario a un proyecto ajeno.
